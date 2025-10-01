@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Your Typing Stats</h2>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="statsChart"></canvas>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/get_stats')
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('statsChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'WPM (Words Per Minute)',
+                                data: data.wpm_data,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                tension: 0.1,
+                                yAxisID: 'y',
+                            }, {
+                                label: 'Accuracy (%)',
+                                data: data.accuracy_data,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                tension: 0.1,
+                                yAxisID: 'y1',
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                    title: { display: true, text: 'WPM' }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    min: 0,
+                                    max: 100,
+                                    grid: { drawOnChartArea: false },
+                                    title: { display: true, text: 'Accuracy (%)' }
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+{% endblock %}
