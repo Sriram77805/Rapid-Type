@@ -1,0 +1,181 @@
+/* static/css/style.css */
+:root {
+    --bg-color: #F8F9FA;          /* Paper - Light Gray Background */
+    --text-color: #212529;        /* Paper - Dark Charcoal Text */
+    --sub-color: #6C757D;         /* Paper - Medium Gray Text */
+    --accent-color: #007BFF;      /* Paper - Vibrant Blue */
+    --correct-color: #28A745;     /* Paper - Green */
+    --incorrect-color: #DC3545;   /* Paper - Red */
+    --caret-color: #007BFF;       /* Paper - Vibrant Blue */
+    --container-bg: #FFFFFF;      /* Paper - Pure White */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
+}
+
+.navbar {
+    background-color: transparent !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Fix for invisible Navbar Links */
+.navbar .nav-link {
+    color: var(--sub-color);
+}
+
+.navbar .nav-link:hover {
+    color: var(--text-color);
+}
+
+
+#test-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+/* Config Bar */
+#config-bar {
+    background-color: transparent;
+    gap: 0.5rem 1.5rem !important;
+}
+.separator {
+    width: 2px;
+    height: 1rem;
+    background-color: var(--sub-color);
+}
+.btn-config {
+    color: var(--sub-color);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+    padding: 0.25rem 0.5rem;
+}
+.btn-config.active {
+    color: var(--accent-color);
+}
+.btn-config:hover {
+    color: var(--text-color);
+}
+
+/* Typing Area */
+#typing-box {
+    background-color: var(--container-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+#timer-display {
+    color: var(--accent-color);
+}
+#text-to-type {
+    user-select: none;
+    line-height: 2;
+    max-height: 6em; /* 2em (line-height) * 3 (lines) */
+    overflow: hidden;
+    color: var(--sub-color);
+    text-align: left;
+    position: relative;
+    font-size: 1.25rem;
+}
+#user-input {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 1rem;
+    background-color: transparent;
+    color: transparent; /* Make typing invisible */
+    caret-color: transparent; /* Hide the default textarea caret */
+    border: none; resize: none;
+    font-size: 1.25rem;
+    font-family: 'Roboto Mono', monospace;
+}
+#user-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Character Styling */
+span.correct { color: var(--text-color); }
+span.incorrect { 
+    color: var(--incorrect-color);
+    text-decoration: underline;
+}
+span.untyped { color: var(--sub-color); }
+
+.cursor {
+    border-left: 2px solid var(--caret-color);
+    animation: blink 1s infinite;
+    margin-left: -2px; /* Fine-tune cursor position */
+}
+
+@keyframes blink {
+    0%, 100% { border-left-color: var(--caret-color); }
+    50% { border-left-color: transparent; }
+}
+
+/* Results Area */
+.results-summary {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+}
+.result-box .result-title {
+    color: var(--sub-color);
+    font-size: 1.5rem;
+}
+.result-box .result-value {
+    color: var(--accent-color);
+    font-size: 5rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.results-details {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.stat-box {
+    background: var(--container-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 150px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.stat-box .stat-title {
+    color: var(--sub-color);
+    font-size: 0.9rem;
+}
+.stat-box .stat-value {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Buttons */
+#reset-btn, #next-test-btn {
+    background: transparent;
+    border: none;
+    color: var(--sub-color);
+    font-size: 2rem;
+    transition: color 0.2s;
+}
+#reset-btn:hover, #next-test-btn:hover {
+    color: var(--text-color);
+}
+#next-test-btn {
+    font-size: 1rem;
+    background-color: var(--accent-color);
+    color: #FFFFFF; /* Changed for better contrast */
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
